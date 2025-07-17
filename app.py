@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, render_template_string
 import subprocess
 import os
 import shutil
+import platform
 
 app = Flask(__name__)
 
@@ -23,3 +24,7 @@ def index():
             output = f"Error: {e}"
 
     return render_template("index.html", output=output)
+
+@app.route("/os")
+def os():
+    return render_template("index.html", output=platform.uname())
